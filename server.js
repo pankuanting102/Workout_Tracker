@@ -1,10 +1,13 @@
-// Your assignment is to define the routes below. Good luck!
+
 
 const express = require("express");
+const apiRoutes = require("./routes/api");
+const htmlRoutes = require("./routes/view");
 const mongoose = require("mongoose");
 const path = require("path")
 const logger = require("morgan");
-// const User = require("./userModel.js")
+// const seeder = require("./seeders/seed");
+const User = require("./models/workouts.js")
 const app = express();
 
 
@@ -20,10 +23,27 @@ const collections = ["workouts"];
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/custommethoddb", { useNewUrlParser: true })
 
+app.use("/api", apiRoutes);
+app.use(htmlRoutes);
 
 
-
-
+// seeder.connect("mongodb://localhost/sample-dev", function() {
+ 
+//   // Load Mongoose models
+//   seeder.loadModels([
+//     './models/workouts.js',
+//   ]);
+ 
+//   // Clear specified collections
+//   seeder.clearModels("UserSchema", function() {
+ 
+//     // Callback to populate DB once collections have been cleared
+//     seeder.populateModels(data, function() {
+//       seeder.disconnect();
+//     });
+ 
+//   });
+// });
 
 app.get("/", (req, res) => {
     res.send(index.html);
@@ -36,8 +56,6 @@ app.get("/exercise", (req, res) => {
 app.get("/stats", (req, res) => {
     res.sendFile(path.join(__dirname, "/public/stats.html"))
 })
-
-
 
 // Listen on port 3000
 app.listen(3000, () => {
