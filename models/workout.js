@@ -24,14 +24,12 @@ const workoutSchema = new Schema(
 
                 distance: {
                     type: Number,
-                    trim: true,
-                    min: [1, 'Please enter at least 1 mile'],
+                    reqired: 'Please enter at least 1 mile',
                 },
 
                 duration: {
                     type: Number,
-                    trim: true,
-                    min: [1, 'Please enter at least 1 min'],
+                    required: 'Please enter at least 1 min',
                 },
 
                 reps: {
@@ -50,14 +48,14 @@ const workoutSchema = new Schema(
 
 
     },
-    // {
-    //     toJSON: {
-    //         virtuals: true
-    //     }
-    // }
+    {
+        toJSON: {
+            virtuals: true
+        }
+    }
 );
 
-workoutSchema.virtual("totalDuratioon").get(function () {
+workoutSchema.virtual("totalDuration").get(function () {
     return this.exercises.reduce((total, exercise) => {
         return total + exercise.duration;
     }, 0);

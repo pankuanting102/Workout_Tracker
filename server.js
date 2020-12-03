@@ -4,7 +4,6 @@ const htmlRoutes = require("./routes/view.js");
 const mongoose = require("mongoose");
 const path = require("path")
 const logger = require("morgan");
-const seeder = require("mongoose-seed");
 const app = express();
 
 
@@ -18,7 +17,7 @@ app.use(express.static("public"));
 const databaseUrl = "workouts_db";
 const collections = ["workouts"];
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true }, {useFindAndModify: false})
 
 app.use(apiRoutes);
 app.use(htmlRoutes);

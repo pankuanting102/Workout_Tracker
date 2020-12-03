@@ -39,7 +39,7 @@ router.put("/api/workouts/:id", ({ body, params }, res) => {
 
 router.get("/api/workouts/range", (req, res) => {
     Workout.find()
-        .limit(5)
+        .limit(7)
         .then(result => {
             res.json(result)
         })
@@ -49,13 +49,10 @@ router.get("/api/workouts/range", (req, res) => {
 });
 
 router.delete("/api/workouts", ({ body }, res) => {
-    Workout.remove({}, (error, response) => {
-        if (error) {
-            res.send(error);
-        } else {
-            res.send(response)
-        }
-
+    Workout.deleteMany().then(() => {
+        res.json(true)
+    }).catch(err => {
+        res.json(err);
     });
 
 });
