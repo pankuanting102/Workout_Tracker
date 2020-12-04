@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const path = require("path")
 const logger = require("morgan");
 const app = express();
-
+var PORT = process.env.PORT || 3001;
 
 app.use(logger("dev"));
 
@@ -29,6 +29,6 @@ app.use(htmlRoutes);
 
 
 // Listen on port 3000
-app.listen(3000, () => {
-    console.log("App running on port http://localhost:3000");
-});
+app.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
+  });
