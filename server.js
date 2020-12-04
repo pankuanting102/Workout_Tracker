@@ -17,7 +17,12 @@ app.use(express.static("public"));
 const databaseUrl = "workouts_db";
 const collections = ["workouts"];
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true }, {useFindAndModify: false})
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  })
 
 app.use(apiRoutes);
 app.use(htmlRoutes);
