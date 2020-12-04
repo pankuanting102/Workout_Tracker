@@ -38,7 +38,7 @@ router.put("/api/workouts/:id", ({ body, params }, res) => {
 });
 
 router.get("/api/workouts/range", (req, res) => {
-    Workout.find()
+    Workout.find({})
         .limit(7)
         .then(result => {
             res.json(result)
